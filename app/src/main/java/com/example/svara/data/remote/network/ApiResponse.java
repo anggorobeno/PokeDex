@@ -1,8 +1,8 @@
-package com.example.svara.data.remote.response;
+package com.example.svara.data.remote.network;
 
-import static com.example.svara.data.remote.response.StatusResponse.EMPTY;
-import static com.example.svara.data.remote.response.StatusResponse.ERROR;
-import static com.example.svara.data.remote.response.StatusResponse.SUCCESS;
+import static com.example.svara.data.remote.network.StatusResponse.EMPTY;
+import static com.example.svara.data.remote.network.StatusResponse.ERROR;
+import static com.example.svara.data.remote.network.StatusResponse.SUCCESS;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

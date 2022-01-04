@@ -53,4 +53,6 @@ public class PokemonEntity {
     public void setId(int id) {
         this.id = id;
     }
+
+
 }

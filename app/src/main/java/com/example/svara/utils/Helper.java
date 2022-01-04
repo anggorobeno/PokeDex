@@ -6,7 +6,7 @@ import androidx.room.util.StringUtil;
 
 public class Helper {
     public static String getIdFromUrl(String url) {
-        return url.substring(url.lastIndexOf('/') - 1, url.lastIndexOf('/'));
+        return url.substring(url.lastIndexOf('/') - 2, url.lastIndexOf('/'));
     }
     public static String getWeight(double weight){
         return weight/10 + " Kg";

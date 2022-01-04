@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E8D878"
-    tools:context=".ui.DetailPokemonFragment">
+    tools:context=".ui.detailpokemon.DetailPokemonFragment">
 
     <!-- Background -->
 
@@ -122,9 +122,9 @@
         android:layout_height="60dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/line"
-        app:layout_constraintTop_toTopOf="@id/view_background"
-        app:layout_constraintStart_toEndOf="@id/tv_pokemon_height"
-        app:layout_constraintEnd_toStartOf="@id/tv_pokemon_weight"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/view_background" />
 
     <!-- Pokemon Weight -->
     <TextView
@@ -168,5 +168,26 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_catch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_pokeball"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/view_background"
+        app:layout_constraintStart_toStartOf="@id/view_background"
+        app:layout_constraintTop_toBottomOf="@+id/view_line" />
+
+    <TextView
+        android:id="@+id/tv_catch_pokemon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppin_medium"
+        android:textSize="@dimen/dimens_16"
+        app:layout_constraintBottom_toBottomOf="@+id/iv_catch"
+        app:layout_constraintEnd_toEndOf="@+id/iv_catch"
+        app:layout_constraintStart_toStartOf="@+id/iv_catch"
+        app:layout_constraintTop_toTopOf="@+id/iv_catch" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

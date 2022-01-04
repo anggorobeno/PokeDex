@@ -1,36 +1,24 @@
-package com.example.svara.ui;
-
-import static android.content.ContentValues.TAG;
+package com.example.svara.ui.listpokemon;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Adapter;
-import android.widget.GridLayout;
-import android.widget.Toast;
 
 import com.example.svara.R;
 import com.example.svara.data.local.entity.PokemonEntity;
-import com.example.svara.data.remote.response.ResultsItem;
 import com.example.svara.databinding.FragmentPokemonBinding;
 import com.example.svara.ui.adapter.PokemonAdapter;
 import com.example.svara.utils.Constant;
 import com.example.svara.utils.Helper;
-import com.example.svara.viewmodel.PokemonViewModel;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -61,7 +49,6 @@ public class PokemonFragment extends Fragment {
     private void showRv() {
         binding.recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 2));
         binding.recyclerView.setHasFixedSize(true);
-        binding.recyclerView.smoothScrollToPosition(0);
         binding.recyclerView.setAdapter(adapter);
         adapter.setOnItemClickCallback(new PokemonAdapter.OnItemClickCallback() {
             @Override
@@ -76,10 +63,6 @@ public class PokemonFragment extends Fragment {
 
     private void getPokemonList() {
         viewModel.getListPokemon().observe(getViewLifecycleOwner(), pokemonResponse -> {
-//            if (pokemonResponse != null){
-//                adapter.setListPokemon(pokemonResponse.getResults());
-//
-//            }
             if (pokemonResponse != null) {
                 switch (pokemonResponse.status) {
                     case LOADING:

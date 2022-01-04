@@ -6,13 +6,8 @@ import android.content.Context;
 import com.example.svara.BuildConfig;
 import com.example.svara.data.local.room.PokemonDB;
 import com.example.svara.data.local.room.PokemonDao;
-import com.example.svara.data.remote.network.ApiHelper;
-import com.example.svara.data.remote.network.ApiHelperImpl;
 import com.example.svara.data.remote.network.ApiService;
 import com.example.svara.utils.AppExecutors;
-import com.google.gson.Gson;
-
-import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
@@ -63,11 +58,6 @@ public class AppModule {
     @Provides
     static ApiService provideApiService(Retrofit retrofit) {
         return retrofit.create(ApiService.class);
-    }
-
-    @Provides
-    static ApiHelper provideApiHelper(ApiHelperImpl apiHelper){
-        return apiHelper;
     }
 
     @Provides

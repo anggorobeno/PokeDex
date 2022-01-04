@@ -3,13 +3,10 @@ package com.example.svara.data.remote;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.svara.data.remote.network.ApiHelper;
 import com.example.svara.data.remote.network.ApiService;
-import com.example.svara.data.remote.response.ApiResponse;
+import com.example.svara.data.remote.network.ApiResponse;
 import com.example.svara.data.remote.response.DetailPokemonResponse;
 import com.example.svara.data.remote.response.PokemonResponse;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -27,7 +24,7 @@ public class RemoteDataSource {
 
     public LiveData<ApiResponse<PokemonResponse>> getListPokemon() {
         MutableLiveData<ApiResponse<PokemonResponse>> result = new MutableLiveData<>();
-        apiService.getPokemonList(10).enqueue(new Callback<PokemonResponse>() {
+        apiService.getPokemonList(20,10).enqueue(new Callback<PokemonResponse>() {
             @Override
             public void onResponse(Call<PokemonResponse> call, Response<PokemonResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {

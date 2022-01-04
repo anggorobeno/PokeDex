@@ -18,13 +18,13 @@ public class LocalDataSource {
         this.pokemonDao = pokemonDao;
     }
 
-    public LiveData<List<PokemonEntity>> getCaughtPokemon() {
+    public LiveData<List<DetailPokemonEntity>> getCaughtPokemon() {
         return pokemonDao.getCaughtPokemon();
     }
 
-    public void setCaughtPokemon(PokemonEntity pokemonEntity, boolean newState) {
+    public void setCaughtPokemon(DetailPokemonEntity pokemonEntity, boolean newState) {
         pokemonEntity.setCaught(newState);
-        pokemonDao.updateCourse(pokemonEntity);
+        pokemonDao.update(pokemonEntity);
     }
 
     public LiveData<List<PokemonEntity>> getListPokemon() {

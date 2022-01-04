@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.example.svara.ui.PokemonFragment"
+        android:name="com.example.svara.ui.listpokemon.PokemonFragment"
         android:label="@string/title_home"
         >
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/savedPokemon"
-        android:name="com.example.svara.ui.SavedPokemonFragment"
+        android:name="com.example.svara.ui.caughtpokemon.CaughtPokemonFragment"
         android:label="Saved Pokemon"
          >
         <action
@@ -27,7 +27,7 @@
 
     <fragment
         android:id="@+id/searchPokemon"
-        android:name="com.example.svara.ui.SearchPokemonFragment"
+        android:name="com.example.svara.ui.searchpokemon.SearchPokemonFragment"
         android:label="Search Pokemon"
          >
         <action
@@ -36,7 +36,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailPokemonFragment"
-        android:name="com.example.svara.ui.DetailPokemonFragment"
+        android:name="com.example.svara.ui.detailpokemon.DetailPokemonFragment"
         android:label="fragment_detail_pokemon"
          />
 </navigation>

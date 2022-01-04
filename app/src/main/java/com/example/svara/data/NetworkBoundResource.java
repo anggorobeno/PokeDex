@@ -3,7 +3,7 @@ package com.example.svara.data;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 
-import com.example.svara.data.remote.response.ApiResponse;
+import com.example.svara.data.remote.network.ApiResponse;
 import com.example.svara.utils.AppExecutors;
 import com.example.svara.utils.Resource;
 

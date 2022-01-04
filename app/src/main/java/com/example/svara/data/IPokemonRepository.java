@@ -12,7 +12,7 @@ import java.util.List;
 public interface IPokemonRepository {
     public LiveData<Resource<List<PokemonEntity>>> getPokemonList();
     public LiveData<Resource<DetailPokemonEntity>> getDetailPokemon(int id);
-    public LiveData<List<PokemonEntity>> getCaughtPokemon();
-    public void setCaughtPokemon(PokemonEntity pokemonEntity, boolean state);
+    public LiveData<List<DetailPokemonEntity>> getCaughtPokemon();
+    public void setCaughtPokemon(DetailPokemonEntity pokemonEntity, boolean state);
 
 }

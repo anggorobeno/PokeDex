@@ -14,11 +14,11 @@ import java.util.List;
 
 @Dao
 public interface PokemonDao {
-    @Query("SELECT * FROM list_pokemon_table WHERE caught = 1")
-    LiveData<List<PokemonEntity>> getCaughtPokemon();
+    @Query("SELECT * FROM detail_pokemon_table WHERE caught = 1")
+    LiveData<List<DetailPokemonEntity>> getCaughtPokemon();
 
     @Update
-    void updateCourse(PokemonEntity pokemonEntity);
+    void updatePokemon(PokemonEntity pokemonEntity);
 
     @Query("SELECT * FROM list_pokemon_table")
     LiveData<List<PokemonEntity>> getListPokemon();
@@ -31,4 +31,7 @@ public interface PokemonDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertPokemonDetail(List<DetailPokemonEntity> pokemonEntities);
+
+    @Update
+    void update(DetailPokemonEntity pokemonEntity);
 }

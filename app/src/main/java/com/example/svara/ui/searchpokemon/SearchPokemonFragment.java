@@ -1,4 +1,4 @@
-package com.example.svara.ui;
+package com.example.svara.ui.searchpokemon;
 
 import android.os.Bundle;
 

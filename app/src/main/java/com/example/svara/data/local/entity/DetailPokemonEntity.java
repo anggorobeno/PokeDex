@@ -5,10 +5,11 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.google.gson.annotations.SerializedName;
 
 @Entity(tableName = "detail_pokemon_table")
 public class DetailPokemonEntity {
+    @ColumnInfo(name = "caught")
+    private boolean caught = false;
 
     @PrimaryKey
     @NonNull
@@ -22,6 +23,7 @@ public class DetailPokemonEntity {
 
     private String url;
 
+    @NonNull
     public String getId() {
         return id;
     }
@@ -62,7 +64,16 @@ public class DetailPokemonEntity {
         this.url = url;
     }
 
-    public DetailPokemonEntity(String id, String name, int height, int weight, String url) {
+    public boolean isCaught() {
+        return caught;
+    }
+
+    public void setCaught(boolean caught) {
+        this.caught = caught;
+    }
+
+    public DetailPokemonEntity(boolean caught, @NonNull String id, String name, int height, int weight, String url) {
+        this.caught = caught;
         this.id = id;
         this.name = name;
         this.height = height;

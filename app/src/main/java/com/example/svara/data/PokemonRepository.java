@@ -1,12 +1,16 @@
 package com.example.svara.data;
 
+import static android.content.ContentValues.TAG;
+
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 
 import com.example.svara.data.local.LocalDataSource;
 import com.example.svara.data.local.entity.DetailPokemonEntity;
 import com.example.svara.data.local.entity.PokemonEntity;
 import com.example.svara.data.remote.RemoteDataSource;
-import com.example.svara.data.remote.response.ApiResponse;
+import com.example.svara.data.remote.network.ApiResponse;
 import com.example.svara.data.remote.response.DetailPokemonResponse;
 import com.example.svara.data.remote.response.PokemonResponse;
 import com.example.svara.data.remote.response.ResultsItem;
@@ -83,6 +87,7 @@ public class PokemonRepository implements IPokemonRepository {
 
             @Override
             protected LiveData<ApiResponse<DetailPokemonResponse>> createCall() {
+                Log.d(TAG, "createCall: "+id);
                 return remoteDataSource.getDetailPokemon(id);
             }
 
@@ -90,6 +95,7 @@ public class PokemonRepository implements IPokemonRepository {
             protected void saveCallResult(DetailPokemonResponse data) {
                 List<DetailPokemonEntity> pokemonEntities = new ArrayList<>();
                 DetailPokemonEntity pokemon = new DetailPokemonEntity(
+                        false,
                         data.getId(),
                         data.getName(),
                         data.getHeight(),
@@ -104,12 +110,12 @@ public class PokemonRepository implements IPokemonRepository {
     }
 
     @Override
-    public LiveData<List<PokemonEntity>> getCaughtPokemon() {
-        return null;
+    public LiveData<List<DetailPokemonEntity>> getCaughtPokemon() {
+        return localDataSource.getCaughtPokemon();
     }
 
     @Override
-    public void setCaughtPokemon(PokemonEntity pokemonEntity, boolean state) {
-
+    public void setCaughtPokemon(DetailPokemonEntity pokemonEntity, boolean state) {
+        appExecutors.diskIO().execute(() -> localDataSource.setCaughtPokemon(pokemonEntity, state));
     }
 }
