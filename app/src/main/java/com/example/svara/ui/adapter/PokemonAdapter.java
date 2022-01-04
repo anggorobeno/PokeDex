@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.svara.data.local.entity.PokemonEntity;
 import com.example.svara.data.remote.response.ResultsItem;
 import com.example.svara.databinding.PokemonListBinding;
 import com.example.svara.utils.Helper;
@@ -19,13 +20,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.ViewHolder> {
-    private ArrayList<ResultsItem> listPokemon = new ArrayList<>();
+    private ArrayList<PokemonEntity> listPokemon = new ArrayList<>();
     private OnItemClickCallback onItemClickCallback;
 
     public void setOnItemClickCallback(OnItemClickCallback onItemClickCallback) {
         this.onItemClickCallback = onItemClickCallback;
     }
-    public void setListPokemon(List<ResultsItem> listPokemon){
+    public void setListPokemon(List<PokemonEntity> listPokemon){
         Log.d(TAG, "setListPokemon: " + String.valueOf(listPokemon));
         if (listPokemon == null) return;
         this.listPokemon.clear();
@@ -60,7 +61,7 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.ViewHold
             super(binding.getRoot());
             this.binding = binding;
         }
-        private void bind(ResultsItem pokemon){
+        private void bind(PokemonEntity pokemon){
             String id = Helper.getIdFromUrl(pokemon.getUrl());
             binding.tvPokemonName.setText(pokemon.getName());
             Glide.with(itemView)
@@ -70,6 +71,6 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.ViewHold
 
     }
     public interface OnItemClickCallback {
-        void onItemClicked(ResultsItem data);
+        void onItemClicked(PokemonEntity data);
     }
 }

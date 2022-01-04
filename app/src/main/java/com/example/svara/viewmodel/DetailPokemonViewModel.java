@@ -47,5 +47,9 @@ public class DetailPokemonViewModel extends ViewModel {
         });
     }
 
+    public void setCaughtPokemon(){
+
+    }
+
 
 }

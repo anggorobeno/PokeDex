@@ -1,10 +1,15 @@
 package com.example.svara.di;
 
 
+import android.content.Context;
+
 import com.example.svara.BuildConfig;
+import com.example.svara.data.local.room.PokemonDB;
+import com.example.svara.data.local.room.PokemonDao;
 import com.example.svara.data.remote.network.ApiHelper;
 import com.example.svara.data.remote.network.ApiHelperImpl;
 import com.example.svara.data.remote.network.ApiService;
+import com.example.svara.utils.AppExecutors;
 import com.google.gson.Gson;
 
 import javax.inject.Singleton;
@@ -12,6 +17,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import dagger.hilt.InstallIn;
+import dagger.hilt.android.qualifiers.ApplicationContext;
 import dagger.hilt.components.SingletonComponent;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -62,6 +68,21 @@ public class AppModule {
     @Provides
     static ApiHelper provideApiHelper(ApiHelperImpl apiHelper){
         return apiHelper;
+    }
+
+    @Provides
+    static PokemonDB provideDatabase(@ApplicationContext Context context){
+        return PokemonDB.getInstance(context);
+    }
+
+    @Provides
+    static PokemonDao provideDao(PokemonDB db){
+        return db.pokemonDao();
+    }
+
+    @Provides
+    static AppExecutors provideAppExecutors(){
+        return new AppExecutors();
     }
 
 
