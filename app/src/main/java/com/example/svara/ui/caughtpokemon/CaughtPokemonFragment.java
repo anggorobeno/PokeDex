@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.svara.R;
+import com.example.svara.data.local.entity.DetailPokemonEntity;
 import com.example.svara.data.local.entity.PokemonEntity;
 import com.example.svara.databinding.FragmentCaughtPokemonBinding;
 import com.example.svara.databinding.FragmentPokemonBinding;
@@ -70,14 +71,14 @@ public class CaughtPokemonFragment extends Fragment {
         binding.recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 2));
         binding.recyclerView.setHasFixedSize(true);
         binding.recyclerView.setAdapter(adapter);
-//        adapter.setOnItemClickCallback(new PokemonAdapter.OnItemClickCallback() {
-//            @Override
-//            public void onItemClicked(PokemonEntity data) {
-//                Bundle bundle = new Bundle();
-//                int id = Integer.parseInt(Helper.getIdFromUrl(data.getUrl()));
-//                bundle.putInt(Constant.EXTRA_POKEMON_ID, id);
-//                Navigation.findNavController(requireView()).navigate(R.id.detailPokemonFragment, bundle);
-//            }
-//        });
+        adapter.setOnItemClickCallback(new CaughtPokemonAdapter.OnItemClickCallback() {
+            @Override
+            public void onItemClicked(DetailPokemonEntity data) {
+                Bundle bundle = new Bundle();
+                int id = Integer.parseInt(data.getId());
+                bundle.putInt(Constant.EXTRA_POKEMON_ID, id);
+                Navigation.findNavController(requireView()).navigate(R.id.detailPokemonFragment, bundle);
+            }
+        });
     }
 }

@@ -29,6 +29,12 @@ public class CaughtPokemonAdapter extends RecyclerView.Adapter<CaughtPokemonAdap
         this.listPokemon.addAll(listPokemon);
         notifyDataSetChanged();
     }
+
+    private OnItemClickCallback onItemClickCallback;
+
+    public void setOnItemClickCallback(OnItemClickCallback onItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback;
+    }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -39,8 +45,9 @@ public class CaughtPokemonAdapter extends RecyclerView.Adapter<CaughtPokemonAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.bind(listPokemon.get(position));
+        holder.itemView.setOnClickListener(view -> onItemClickCallback.onItemClicked(listPokemon.get(holder.getBindingAdapterPosition())));
 
-    }
+        }
 
     @Override
     public int getItemCount() {
@@ -61,5 +68,8 @@ public class CaughtPokemonAdapter extends RecyclerView.Adapter<CaughtPokemonAdap
                     .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+pokemon.getId()+".png")
                     .into(binding.ivPokemon);
         }
+    }
+    public interface OnItemClickCallback {
+        void onItemClicked(DetailPokemonEntity data);
     }
 }
