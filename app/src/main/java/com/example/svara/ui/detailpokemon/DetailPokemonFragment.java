@@ -22,6 +22,8 @@ import com.example.svara.utils.Constant;
 import com.example.svara.utils.Helper;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.Random;
+
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
@@ -69,12 +71,20 @@ public class DetailPokemonFragment extends Fragment {
                             }
                             Log.d(TAG, "caughtPokemon: "+detailPokemonEntityResource.data.isCaught());
                             binding.ivCatch.setOnClickListener(view ->{
-                                viewModel.setCaughtPokemon();
-                                if (state){
-                                    Snackbar.make(view, "You Released a Pokemon", Snackbar.LENGTH_LONG).show();
+                                Random random = new Random();
+                                int randomNumber = random.nextInt(3-1) + 1;
+                                if (!state){
+                                    if (randomNumber == 1){
+                                        viewModel.setCaughtPokemon();
+                                        Snackbar.make(view, "You Caught a Pokemon", Snackbar.LENGTH_SHORT).show();
+                                    }
+                                    else {
+                                        Snackbar.make(view, "You Failed to Catch a Pokemon", Snackbar.LENGTH_SHORT).show();
+                                    }
                                 }
                                 else {
-                                    Snackbar.make(view, "You Caught a Pokemon", Snackbar.LENGTH_LONG).show();
+                                    Snackbar.make(view, "You Released a Pokemon", Snackbar.LENGTH_SHORT).show();
+                                    viewModel.setCaughtPokemon();
                                 }
                             });
                         }
