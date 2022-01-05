@@ -39,4 +39,8 @@
         android:name="com.example.svara.ui.detailpokemon.DetailPokemonFragment"
         android:label="fragment_detail_pokemon"
          />
+    <fragment
+        android:id="@+id/pagedFragment"
+        android:name="com.example.svara.data.paging.PagedFragment"
+        android:label="PagedFragment" />
 </navigation>

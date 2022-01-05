@@ -12,5 +12,10 @@
         android:id="@+id/searchPokemon"
         android:icon="@drawable/baseline_search_black_24dp"
         android:title="Search Pokemon" />
+    <item
+        android:id="@+id/pagedFragment"
+        android:icon="@drawable/baseline_home_black_24dp"
+        android:title="List"/>
+
 
 </menu>

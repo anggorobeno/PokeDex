@@ -14,9 +14,12 @@ import dagger.Provides;
 import dagger.hilt.InstallIn;
 import dagger.hilt.android.qualifiers.ApplicationContext;
 import dagger.hilt.components.SingletonComponent;
+import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
@@ -37,6 +40,16 @@ public class AppModule {
             httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
             return new OkHttpClient.Builder()
                     .addInterceptor(httpLoggingInterceptor)
+                    .addInterceptor(chain -> {
+                        Request original = chain.request();
+                        HttpUrl originalHttpUrl = original.url();
+                        HttpUrl url = originalHttpUrl.newBuilder().build();
+                        Request.Builder requestBuilder = original.newBuilder()
+                                .url(url);
+
+                        Request request = requestBuilder.build();
+                        return chain.proceed(request);
+                    })
                     .build();
         } else {
             return new OkHttpClient.Builder()
@@ -51,6 +64,7 @@ public class AppModule {
         return new Retrofit.Builder()
                 .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
                 .client(client)
                 .build();
     }
@@ -61,21 +75,19 @@ public class AppModule {
     }
 
     @Provides
-    static PokemonDB provideDatabase(@ApplicationContext Context context){
+    static PokemonDB provideDatabase(@ApplicationContext Context context) {
         return PokemonDB.getInstance(context);
     }
 
     @Provides
-    static PokemonDao provideDao(PokemonDB db){
+    static PokemonDao provideDao(PokemonDB db) {
         return db.pokemonDao();
     }
 
     @Provides
-    static AppExecutors provideAppExecutors(){
+    static AppExecutors provideAppExecutors() {
         return new AppExecutors();
     }
-
-
 
 
 }
